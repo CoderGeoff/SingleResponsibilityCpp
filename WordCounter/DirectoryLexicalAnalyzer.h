@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 
-class WordCounter
+class DirectoryLexicalAnalyzer
 {
     std::string m_DirectoryName;
     size_t m_WordCount;
@@ -17,7 +17,7 @@ class WordCounter
     template <class T> static void ThrowError(const char* errorApiCall, T diagnosticInfo);
 
 public:
-    explicit WordCounter(const std::string& directoryName);
+    explicit DirectoryLexicalAnalyzer(const std::string& directoryName);
     size_t WordCount() const;
     size_t LengthOfLongestWord() const;
     size_t Frequency(std::string word) const;

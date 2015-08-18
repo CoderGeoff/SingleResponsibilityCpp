@@ -32,13 +32,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WordCounterTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TemporaryDirectory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TemporaryFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryLexicalAnalyzerTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

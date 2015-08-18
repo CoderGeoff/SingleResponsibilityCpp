@@ -1,11 +1,11 @@
-#include "WordCounter.h"
+#include "DirectoryLexicalAnalyzer.h"
 #include <windows.h>
 #include <sstream>
 #include <fstream>
 #include <vector>
 #include <algorithm>
 
-WordCounter::WordCounter(const std::string& directoryName)
+DirectoryLexicalAnalyzer::DirectoryLexicalAnalyzer(const std::string& directoryName)
     : m_DirectoryName(directoryName),
     m_WordCount(0),
     m_LongestWordLength(0),
@@ -13,33 +13,33 @@ WordCounter::WordCounter(const std::string& directoryName)
 {
 }
 
-size_t WordCounter::WordCount() const
+size_t DirectoryLexicalAnalyzer::WordCount() const
 {
     LazyInitialize();
     return m_WordCount;
 }
 
-size_t WordCounter::LengthOfLongestWord() const
+size_t DirectoryLexicalAnalyzer::LengthOfLongestWord() const
 {
     LazyInitialize();
     return m_LongestWordLength;
 }
 
-size_t WordCounter::Frequency(std::string word) const
+size_t DirectoryLexicalAnalyzer::Frequency(std::string word) const
 {
     LazyInitialize();
     auto wordFinder = m_Frequency.find(word);
     return wordFinder == m_Frequency.end() ? 0 : wordFinder->second;
 }
 
-void WordCounter::LazyInitialize() const
+void DirectoryLexicalAnalyzer::LazyInitialize() const
 {
     if (m_IsInitialized)
         return;
-    const_cast<WordCounter*>(this)->Initialize();
+    const_cast<DirectoryLexicalAnalyzer*>(this)->Initialize();
 }
 
-void WordCounter::Initialize()
+void DirectoryLexicalAnalyzer::Initialize()
 {
     std::vector <std::string> fileNames = GetFiles();
     for (auto fileNameIter = fileNames.begin(); fileNameIter != fileNames.end(); ++fileNameIter)
@@ -63,7 +63,7 @@ void WordCounter::Initialize()
     m_IsInitialized = true;
 }
 
-std::vector<std::string> WordCounter::GetFiles() const
+std::vector<std::string> DirectoryLexicalAnalyzer::GetFiles() const
 {
     std::vector<std::string> files;
 
@@ -87,7 +87,7 @@ std::vector<std::string> WordCounter::GetFiles() const
 }
 
 template <class T>
-void WordCounter::ThrowError(const char* errorApiCall, T diagnosticInfo)
+void DirectoryLexicalAnalyzer::ThrowError(const char* errorApiCall, T diagnosticInfo)
 {
     std::stringstream errorBuilder;
     errorBuilder << "Error " << diagnosticInfo << " from " << errorApiCall;

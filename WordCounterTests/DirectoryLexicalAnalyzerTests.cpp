@@ -4,26 +4,26 @@
 #include <gtest/gtest.h>
 #include "TemporaryDirectory.h"
 #include "TemporaryFile.h"
-#include "WordCounter.h"
+#include "DirectoryLexicalAnalyzer.h"
 
 TEST(WordCounterTests, GivenAnEmptyDirectory_WhenWordsAreCounted_ShouldBeZero)
 {
     TemporaryDirectory directory;
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(0, counter.WordCount());
 }
 
 TEST(WordCounterTests, GivenAnEmptyDirectory_WhenLongestWordIsQueried_LengthShouldBeZero)
 {
     TemporaryDirectory directory;
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(0, counter.LengthOfLongestWord());
 }
 
 TEST(WordCounterTests, GivenAnEmptyDirectory_WhenWordFrequencyIsQueried_ShouldBeZero)
 {
     TemporaryDirectory directory;
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(0, counter.Frequency("the"));
 }
 
@@ -31,7 +31,7 @@ TEST(WordCounterTests, GivenOneFileWith5Words_WhenWordsAreCounted_ShouldBe5)
 {
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "one two three four five");
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(5, counter.WordCount());
 }
 
@@ -39,7 +39,7 @@ TEST(WordCounterTests, GivenOneFileWith10LetterWordWords_WhenLongestWordIsQuerie
 {
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "one two vegetarian three four five");
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(10, counter.LengthOfLongestWord());
 }
 
@@ -47,7 +47,7 @@ TEST(WordCounterTests, GivenOneFileWith3RepeatedWords_WhenFrequencyIsQueried_Sho
 {
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "one two two three three three four");
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(3, counter.Frequency("three"));
 }
 
@@ -55,7 +55,7 @@ TEST(WordCounterTests, GivenOneFileWithWordsRepeatedInDifferentCase_WhenFrequenc
 {
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "one ONE OnE oNe");
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(4, counter.Frequency("one"));
 }
 
@@ -66,7 +66,7 @@ TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThe
     TemporaryFile file(directory.Name(), "ones one one's");
 
     // When
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     std::stringstream resultBuilder;
     resultBuilder << "ones: " << counter.Frequency("ones") << ", ";
     resultBuilder << "one: " << counter.Frequency("one") << ", ";
@@ -81,7 +81,7 @@ TEST(WordCounterTests, GivenOneFileWith10WordsOnMultipleLines_WhenWordsAreCounte
 {
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "\r\none two three fours five six\r\n \r\nseven eight nine \r\n\r\nten\r\n");
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(10, counter.WordCount());
 }
 
@@ -90,6 +90,6 @@ TEST(WordCounterTests, GivenTwoFilesWith5WordsEach_WhenWordsAreCounted_ShouldBe1
     TemporaryDirectory directory;
     TemporaryFile file1(directory.Name(), "one two three four five");
     TemporaryFile file2(directory.Name(), "one two three four five");
-    WordCounter counter(directory.Name());
+    DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(10, counter.WordCount());
 }
