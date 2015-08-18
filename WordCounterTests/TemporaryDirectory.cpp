@@ -8,58 +8,35 @@
 
 TemporaryDirectory::TemporaryDirectory()
 {
-    char directoryNameBuffer[MAX_PATH];
-    DWORD bufferLength = GetTempPathA(MAX_PATH, directoryNameBuffer);
+    std::string directoryPath = GetTemporaryPath() + GetTemporaryFileName();
 
-    if (bufferLength == 0)
-        ThrowError("GetTempPathA", GetLastError());
-
-    tmpnam_s(directoryNameBuffer + bufferLength, MAX_PATH - bufferLength);
-
-    if (_mkdir(directoryNameBuffer) == -1)
+    if (_mkdir(directoryPath.c_str()) == -1)
         ThrowError("_mkdir", perror);
 
-    m_Name = directoryNameBuffer;
+    m_Name = directoryPath;
 }
 
-void TemporaryDirectory::DeleteFilesRecursiveInDirectory(const std::string& directory)
-{
-    HANDLE searchHandle;
-    WIN32_FIND_DATAA findResult;
-
-    if ((searchHandle = FindFirstFileA((directory + "/*").c_str(), &findResult)) == INVALID_HANDLE_VALUE)
-        ThrowError("FindFirstFileA", GetLastError());
-
-    do {
-        std::string fileName = directory + "/" + findResult.cFileName;
-        bool isDirectory = (findResult.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
-        bool isCurrentDirectory = std::string(".") == findResult.cFileName;
-        bool isParentDirectory = std::string("..") == findResult.cFileName;
-
-        if (isCurrentDirectory || isParentDirectory) 
-            continue;
-
-        if (isDirectory)
-            DeleteFilesRecursiveInDirectory(fileName);
-
-        if (std::remove(fileName.c_str()) != 0)
-            ThrowError("std::remove", "");
-
-    } while (FindNextFileA(searchHandle, &findResult));
-
-    FindClose(searchHandle);
-
-    if (std::remove(m_Name.c_str()) != 0)
-        ThrowError("std::remove", "");
-}
-
-TemporaryDirectory::~TemporaryDirectory()
-{
-}
 
 const std::string& TemporaryDirectory::Name() const
 {
     return m_Name;
+}
+
+std::string TemporaryDirectory::GetTemporaryPath()
+{
+    char directoryNameBuffer[260];
+    DWORD bufferLength;
+    bufferLength = GetTempPathA(MAX_PATH, directoryNameBuffer);
+    if (bufferLength == 0)
+        ThrowError("GetTempPathA", GetLastError());
+    return std::string(directoryNameBuffer);
+}
+
+std::string TemporaryDirectory::GetTemporaryFileName()
+{
+    char temporaryName[L_tmpnam];
+    tmpnam_s(temporaryName, L_tmpnam);
+    return std::string(temporaryName);
 }
 
 template <class T>

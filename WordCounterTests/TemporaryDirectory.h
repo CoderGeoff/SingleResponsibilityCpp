@@ -4,12 +4,12 @@
 class TemporaryDirectory
 {
     std::string m_Name;
-    void DeleteFilesRecursiveInDirectory(const std::string& directory);
-    template <class T> void ThrowError(const char* errorApiCall, T diagnosticInfo);
+    template <class T> static void ThrowError(const char* errorApiCall, T diagnosticInfo);
+    static std::string GetTemporaryPath();
+    static std::string GetTemporaryFileName();
 
 public:
     TemporaryDirectory();
-    ~TemporaryDirectory();
     const std::string& Name() const;
 };
 
