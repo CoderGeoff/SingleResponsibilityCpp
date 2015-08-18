@@ -3,8 +3,8 @@
 
 #include <gtest/gtest.h>
 #include "TemporaryDirectory.h"
-#include <WordCounter.h>
 #include "TemporaryFile.h"
+#include "WordCounter.h"
 
 TEST(WordCounterTests, GivenAnEmptyDirectory_WhenWordsAreCounted_ShouldBeZero)
 {

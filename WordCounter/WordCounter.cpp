@@ -1,8 +1,8 @@
 #include "WordCounter.h"
+#include <windows.h>
 #include <sstream>
 #include <fstream>
 #include <vector>
-#include <windows.h>
 #include <algorithm>
 
 WordCounter::WordCounter(const std::string& directoryName)
