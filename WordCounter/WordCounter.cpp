@@ -50,9 +50,12 @@ void WordCounter::Initialize()
             std::string word;
             file >> word;
 
-            m_WordCount++; 
-            m_Frequency[word]++;
-            m_LongestWordLength = max(word.length(), m_LongestWordLength);
+            if (word.length() > 0)
+            {
+                m_WordCount++;
+                m_Frequency[word]++;
+                m_LongestWordLength = max(word.length(), m_LongestWordLength);
+            }
         }
     }
     m_IsInitialized = true;
