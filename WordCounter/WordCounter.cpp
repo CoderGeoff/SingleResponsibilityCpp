@@ -1,4 +1,8 @@
 #include "WordCounter.h"
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <windows.h>
 
 void WordCounter::LazyInitialize() const
 {
@@ -7,14 +11,53 @@ void WordCounter::LazyInitialize() const
     const_cast<WordCounter*>(this)->Initialize();
 }
 
+std::vector<std::string> WordCounter::GetFiles()
+{
+    std::vector<std::string> files;
+
+    HANDLE searchHandle;
+    WIN32_FIND_DATAA findResult;
+
+    if ((searchHandle = FindFirstFileA((m_DirectoryName + "/*").c_str(), &findResult)) == INVALID_HANDLE_VALUE)
+        ThrowError("FindFirstFileA", GetLastError());
+
+    do {
+        std::string fileName = m_DirectoryName + "/" + findResult.cFileName;
+        bool isDirectory = (findResult.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+
+        if (!isDirectory)
+            files.push_back(fileName);
+
+    } while (FindNextFileA(searchHandle, &findResult));
+
+    FindClose(searchHandle);
+    return files;
+}
+
 void WordCounter::Initialize()
 {
+    std::vector <std::string> fileNames = GetFiles();
+    for (auto fileNameIter = fileNames.begin(); fileNameIter != fileNames.end(); ++fileNameIter)
+    {
+        std::fstream file;
+        file.open(*fileNameIter, std::ios_base::in);
+        while (!file.eof())
+        {
+            std::string word;
+            file >> word;
 
+            m_WordCount++; 
+            m_Frequency[word]++;
+            m_LongestWordLength = max(word.length(), m_LongestWordLength);
+        }
+    }
     m_IsInitialized = true;
 }
 
 WordCounter::WordCounter(const std::string& directoryName)
     : m_DirectoryName(directoryName),
+    m_WordCount(0),
+    m_LongestWordLength(0),
     m_IsInitialized(false)
 {
 }
@@ -22,15 +65,26 @@ WordCounter::WordCounter(const std::string& directoryName)
 size_t WordCounter::WordCount() const
 {
     LazyInitialize();
-    return 0;
+    return m_WordCount;
 }
 
 size_t WordCounter::LengthOfLongestWord() const
 {
-    return 0;
+    LazyInitialize();
+    return m_LongestWordLength;
 }
 
 size_t WordCounter::Frequency(std::string word) const
 {
-    return 0;
+    LazyInitialize();
+    auto wordFinder = m_Frequency.find(word);
+    return wordFinder == m_Frequency.end() ? 0 : wordFinder->second;
+}
+
+template <class T>
+void WordCounter::ThrowError(const char* errorApiCall, T diagnosticInfo)
+{
+    std::stringstream errorBuilder;
+    errorBuilder << "Error " << diagnosticInfo << " from " << errorApiCall;
+    throw std::exception(errorBuilder.str().c_str());
 }
