@@ -79,3 +79,12 @@ TEST(WordCounterTests, GivenOneFileWith10WordsOnMultipleLines_WhenWordsAreCounte
     WordCounter counter(directory.Name());
     ASSERT_EQ(10, counter.WordCount());
 }
+
+TEST(WordCounterTests, GivenTwoFilesWith5WordsEach_WhenWordsAreCounted_ShouldBe10)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file1(directory.Name(), "one two three four five");
+    TemporaryFile file2(directory.Name(), "one two three four five");
+    WordCounter counter(directory.Name());
+    ASSERT_EQ(10, counter.WordCount());
+}
