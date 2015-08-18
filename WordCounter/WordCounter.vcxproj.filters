@@ -27,12 +27,18 @@
     <ClInclude Include="WordCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MonitoredInputStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WordCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonitoredInputStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
