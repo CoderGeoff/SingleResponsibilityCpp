@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <windows.h>
+#include <algorithm>
 
 WordCounter::WordCounter(const std::string& directoryName)
     : m_DirectoryName(directoryName),
@@ -49,6 +50,7 @@ void WordCounter::Initialize()
         {
             std::string word;
             file >> word;
+            transform(word.begin(), word.end(), word.begin(), ::tolower);
 
             if (word.length() > 0)
             {

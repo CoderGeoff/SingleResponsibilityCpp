@@ -51,6 +51,14 @@ TEST(WordCounterTests, GivenOneFileWith3RepeatedWords_WhenFrequencyIsQueried_Sho
     ASSERT_EQ(3, counter.Frequency("three"));
 }
 
+TEST(WordCounterTests, GivenOneFileWithWordsRepeatedInDifferentCase_WhenFrequencyIsQueried_CountShouldBeReportedAgainstLowerCaseWord)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "one ONE OnE oNe");
+    WordCounter counter(directory.Name());
+    ASSERT_EQ(4, counter.Frequency("one"));
+}
+
 TEST(WordCounterTests, GivenOneFileWith10WordsOnMultipleLines_WhenWordsAreCounted_ShouldBe10)
 {
     TemporaryDirectory directory;
