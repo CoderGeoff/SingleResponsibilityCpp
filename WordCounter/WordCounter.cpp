@@ -74,12 +74,12 @@ std::vector<std::string> WordCounter::GetFiles() const
         ThrowError("FindFirstFileA", GetLastError());
 
     do {
-        std::string fileName = m_DirectoryName + "/" + findResult.cFileName;
         bool isDirectory = (findResult.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
-
         if (!isDirectory)
+        {
+            std::string fileName = m_DirectoryName + "/" + findResult.cFileName;
             files.push_back(fileName);
-
+        }
     } while (FindNextFileA(searchHandle, &findResult));
 
     FindClose(searchHandle);
