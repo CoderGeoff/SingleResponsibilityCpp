@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordCounter", "WordCounter\WordCounter.vcxproj", "{E845F97E-19F5-408D-8652-17196D76DEE4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "GoogleTest\GoogleTest.vcxproj", "{20A878D1-D277-4508-A35E-C871407DF9FD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordCounterTests", "WordCounterTests\WordCounterTests.vcxproj", "{C20C94A5-70D7-4C7D-BA38-BBDC817C7EA6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E845F97E-19F5-408D-8652-17196D76DEE4} = {E845F97E-19F5-408D-8652-17196D76DEE4}
+		{20A878D1-D277-4508-A35E-C871407DF9FD} = {20A878D1-D277-4508-A35E-C871407DF9FD}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E845F97E-19F5-408D-8652-17196D76DEE4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E845F97E-19F5-408D-8652-17196D76DEE4}.Debug|Win32.Build.0 = Debug|Win32
+		{E845F97E-19F5-408D-8652-17196D76DEE4}.Release|Win32.ActiveCfg = Release|Win32
+		{E845F97E-19F5-408D-8652-17196D76DEE4}.Release|Win32.Build.0 = Release|Win32
+		{20A878D1-D277-4508-A35E-C871407DF9FD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{20A878D1-D277-4508-A35E-C871407DF9FD}.Debug|Win32.Build.0 = Debug|Win32
+		{20A878D1-D277-4508-A35E-C871407DF9FD}.Release|Win32.ActiveCfg = Release|Win32
+		{20A878D1-D277-4508-A35E-C871407DF9FD}.Release|Win32.Build.0 = Release|Win32
+		{C20C94A5-70D7-4C7D-BA38-BBDC817C7EA6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C20C94A5-70D7-4C7D-BA38-BBDC817C7EA6}.Debug|Win32.Build.0 = Debug|Win32
+		{C20C94A5-70D7-4C7D-BA38-BBDC817C7EA6}.Release|Win32.ActiveCfg = Release|Win32
+		{C20C94A5-70D7-4C7D-BA38-BBDC817C7EA6}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
