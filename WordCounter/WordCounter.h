@@ -6,6 +6,7 @@ class WordCounter
     std::string m_DirectoryName;
 public:
     explicit WordCounter(const std::string& directoryName);
-    size_t WordCount();
+    size_t WordCount() const;
+    size_t LengthOfLongestWord() const;
 };
 

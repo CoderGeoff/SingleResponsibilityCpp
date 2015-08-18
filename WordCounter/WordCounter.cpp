@@ -5,7 +5,12 @@ WordCounter::WordCounter(const std::string& directoryName)
 {
 }
 
-size_t WordCounter::WordCount()
+size_t WordCounter::WordCount() const
+{
+    return 0;
+}
+
+size_t WordCounter::LengthOfLongestWord() const
 {
     return 0;
 }
