@@ -18,3 +18,10 @@ TEST(WordCounterTests, GivenAnEmptyDirectory_WhenLongestWordIsQueried_LengthShou
     WordCounter counter(directory.Name());
     ASSERT_EQ(0, counter.LengthOfLongestWord());
 }
+
+TEST(WordCounterTests, GivenAnEmptyDirectory_WhenWordFrequencyIsQueried_ShouldBeZero)
+{
+    TemporaryDirectory directory;
+    WordCounter counter(directory.Name());
+    ASSERT_EQ(0, counter.Frequency("the"));
+}

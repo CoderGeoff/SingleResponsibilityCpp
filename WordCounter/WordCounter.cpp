@@ -14,3 +14,8 @@ size_t WordCounter::LengthOfLongestWord() const
 {
     return 0;
 }
+
+size_t WordCounter::Frequency(std::string word) const
+{
+    return 0;
+}
