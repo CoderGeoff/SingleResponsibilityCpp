@@ -88,9 +88,11 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TemporaryDirectory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DummyTests.cpp" />
+    <ClCompile Include="TemporaryDirectory.cpp" />
+    <ClCompile Include="WordCounterTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
