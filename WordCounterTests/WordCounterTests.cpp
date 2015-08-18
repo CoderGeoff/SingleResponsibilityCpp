@@ -61,14 +61,19 @@ TEST(WordCounterTests, GivenOneFileWithWordsRepeatedInDifferentCase_WhenFrequenc
 
 TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThemAsIndependentWords)
 {
+    // Given
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "ones one one's");
+
+    // When
     WordCounter counter(directory.Name());
     std::stringstream resultBuilder;
     resultBuilder << "ones: " << counter.Frequency("ones") << ", ";
     resultBuilder << "one: " << counter.Frequency("one") << ", ";
     resultBuilder << "one's: " << counter.Frequency("one's");
     std::string result = resultBuilder.str();
+
+    // Then
     ASSERT_EQ("ones: 1, one: 1, one's: 1", result);
 }
 
