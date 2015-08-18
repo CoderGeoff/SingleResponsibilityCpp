@@ -58,7 +58,7 @@ void WordCounter::Initialize()
     m_IsInitialized = true;
 }
 
-std::vector<std::string> WordCounter::GetFiles()
+std::vector<std::string> WordCounter::GetFiles() const
 {
     std::vector<std::string> files;
 

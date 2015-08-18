@@ -13,8 +13,8 @@ class WordCounter
 
     void LazyInitialize() const;
     void Initialize();
-    std::vector<std::string> GetFiles();
-    template <class T> void ThrowError(const char* errorApiCall, T diagnosticInfo);
+    std::vector<std::string> GetFiles() const;
+    template <class T> static void ThrowError(const char* errorApiCall, T diagnosticInfo);
 
 public:
     explicit WordCounter(const std::string& directoryName);
