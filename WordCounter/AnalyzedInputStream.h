@@ -2,13 +2,13 @@
 #include <istream>
 #include <memory>
 
-class MonitoredInputStream 
+class AnalyzedInputStream 
 {
     std::shared_ptr<std::istream> m_InputStream;
 public:
-    explicit MonitoredInputStream::MonitoredInputStream(std::shared_ptr<std::istream> inputStream);
+    explicit AnalyzedInputStream::AnalyzedInputStream(std::shared_ptr<std::istream> inputStream);
     template<class T>
-    MonitoredInputStream& operator >> (T& val);
+    AnalyzedInputStream& operator >> (T& val);
 
     size_t WordCount() const;
     size_t LengthOfLongestWord() const;
@@ -16,7 +16,7 @@ public:
 };
 
 template <class T>
-MonitoredInputStream& MonitoredInputStream::operator>>(T& val)
+AnalyzedInputStream& AnalyzedInputStream::operator>>(T& val)
 {
     *m_InputStream >> val;
     return *this;

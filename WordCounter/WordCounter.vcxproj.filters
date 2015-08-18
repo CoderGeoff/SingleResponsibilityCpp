@@ -24,10 +24,10 @@
     <ClInclude Include="TurnOutcome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MonitoredInputStream.h">
+    <ClInclude Include="DirectoryLexicalAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DirectoryLexicalAnalyzer.h">
+    <ClInclude Include="AnalyzedInputStream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MonitoredInputStream.cpp">
+    <ClCompile Include="DirectoryLexicalAnalyzer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DirectoryLexicalAnalyzer.cpp">
+    <ClCompile Include="AnalyzedInputStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
