@@ -4,6 +4,9 @@
 class WordCounter
 {
     std::string m_DirectoryName;
+    bool m_IsInitialized;
+    void LazyInitialize() const;
+    void Initialize();
 public:
     explicit WordCounter(const std::string& directoryName);
     size_t WordCount() const;
