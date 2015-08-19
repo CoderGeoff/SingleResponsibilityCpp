@@ -109,7 +109,7 @@ TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThe
     ASSERT_EQ("ones: 1, one: 1, one's: 1", result);
 }
 
-TEST(WordCounterTests, GivenAWordEndingInPunctuation_WhenWordLengthIdQueried_ShouldIgnorePunctuation)
+TEST(WordCounterTests, GivenAWordEndingInPunctuation_WhenWordLengthIsQueried_ShouldIgnorePunctuation)
 {
     TemporaryDirectory directory;
     TemporaryFile file(directory.Name(), "Hello world!!!");
