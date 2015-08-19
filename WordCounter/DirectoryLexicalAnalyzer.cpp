@@ -25,7 +25,7 @@ size_t DirectoryLexicalAnalyzer::LengthOfLongestWord() const
     return m_LongestWordLength;
 }
 
-size_t DirectoryLexicalAnalyzer::Frequency(std::string word) const
+size_t DirectoryLexicalAnalyzer::Frequency(const std::string& word) const
 {
     LazyInitialize();
     auto wordFinder = m_Frequency.find(word);
