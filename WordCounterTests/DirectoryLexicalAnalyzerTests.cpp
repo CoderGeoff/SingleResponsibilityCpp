@@ -83,6 +83,14 @@ TEST(WordCounterTests, GivenAWordInSingleQuotes_WhenFrequencyIsQueried_ShouldBeC
     ASSERT_EQ(2, counter.Frequency("one"));
 }
 
+TEST(WordCounterTests, GivenAWordInDoubleQuotes_WhenWordLengthIsQueried_ShouldIgnoreTheQuotes)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "\"one\"");
+    DirectoryLexicalAnalyzer counter(directory.Name());
+    ASSERT_EQ(3, counter.LengthOfLongestWord());
+}
+
 TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThemAsIndependentWords)
 {
     // Given
