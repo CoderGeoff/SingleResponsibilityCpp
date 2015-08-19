@@ -67,6 +67,21 @@ TEST(WordCounterTests, GivenOneWordWithDifferentCapitalization_WhenFrequencyIsQu
     ASSERT_EQ(1, counter.Frequency("who"));
 }
 
+TEST(WordCounterTests, GivenAWordInDoubleQuotes_WhenFrequencyIsQueried_ShouldBeCountedWithTheUnquotedWord)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "one \"one\"");
+    DirectoryLexicalAnalyzer counter(directory.Name());
+    ASSERT_EQ(2, counter.Frequency("one"));
+}
+
+TEST(WordCounterTests, GivenAWordInSingleQuotes_WhenFrequencyIsQueried_ShouldBeCountedWithTheUnquotedWord)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "one 'one'");
+    DirectoryLexicalAnalyzer counter(directory.Name());
+    ASSERT_EQ(2, counter.Frequency("one"));
+}
 TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThemAsIndependentWords)
 {
     // Given

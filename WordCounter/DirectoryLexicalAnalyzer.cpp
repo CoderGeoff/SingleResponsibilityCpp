@@ -51,9 +51,10 @@ void DirectoryLexicalAnalyzer::Initialize()
             std::string word;
             file >> word;
 
-
             if (word.length() > 0)
             {
+                word = GetWordWithoutQuotes(word, '"');
+                word = GetWordWithoutQuotes(word, '\'');
 
                 // we lower case the first letter, unless there are capitals inside the word
                 // in which case we assume that it's some kind of abbreviation
@@ -98,4 +99,12 @@ void DirectoryLexicalAnalyzer::ThrowError(const char* errorApiCall, T diagnostic
     std::stringstream errorBuilder;
     errorBuilder << "Error " << diagnosticInfo << " from " << errorApiCall;
     throw std::exception(errorBuilder.str().c_str());
+}
+
+std::string DirectoryLexicalAnalyzer::GetWordWithoutQuotes(std::string& word, char quoteSymbol)
+{
+    bool isQuoted = word.length() > 1 
+        && word[0] == quoteSymbol 
+        && word[word.length() - 1] == quoteSymbol;
+    return isQuoted ? word.substr(1, word.length() - 2) : word;
 }
