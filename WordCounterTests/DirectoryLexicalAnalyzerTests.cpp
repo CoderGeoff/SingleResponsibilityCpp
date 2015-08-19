@@ -117,6 +117,14 @@ TEST(WordCounterTests, GivenAWordEndingInPunctuation_WhenWordLengthIdQueried_Sho
     ASSERT_EQ(5, counter.LengthOfLongestWord());
 }
 
+TEST(WordCounterTests, GivenPunctuationSurroundedByWhitespace_WhenWordCountIsQueried_ShouldIgnoreWordsConsistingOnlyOfPunctuation)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "Hello , world !!!");
+    DirectoryLexicalAnalyzer counter(directory.Name());
+    ASSERT_EQ(2, counter.WordCount());
+}
+
 TEST(WordCounterTests, GivenOneFileWith10WordsOnMultipleLines_WhenWordsAreCounted_ShouldBe10)
 {
     TemporaryDirectory directory;
