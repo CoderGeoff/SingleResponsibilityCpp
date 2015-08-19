@@ -109,6 +109,14 @@ TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThe
     ASSERT_EQ("ones: 1, one: 1, one's: 1", result);
 }
 
+TEST(WordCounterTests, GivenAWordEndingInPunctuation_WhenWordLengthIdQueried_ShouldIgnorePunctuation)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "Hello world!!!");
+    DirectoryLexicalAnalyzer counter(directory.Name());
+    ASSERT_EQ(5, counter.LengthOfLongestWord());
+}
+
 TEST(WordCounterTests, GivenOneFileWith10WordsOnMultipleLines_WhenWordsAreCounted_ShouldBe10)
 {
     TemporaryDirectory directory;

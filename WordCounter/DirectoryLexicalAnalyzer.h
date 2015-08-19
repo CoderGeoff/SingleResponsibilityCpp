@@ -15,7 +15,7 @@ class DirectoryLexicalAnalyzer
     void Initialize();
     std::vector<std::string> GetFiles() const;
     template <class T> static void ThrowError(const char* errorApiCall, T diagnosticInfo);
-    static std::string GetWordWithoutQuotes(std::string& word, char quoteSymbol);
+    static std::string GetWordWithoutSurroundingPunctuation(const std::string& word, const std::string& punctuationSymbols);
 
 public:
     explicit DirectoryLexicalAnalyzer(const std::string& directoryName);

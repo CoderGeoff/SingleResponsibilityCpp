@@ -53,8 +53,10 @@ void DirectoryLexicalAnalyzer::Initialize()
 
             if (word.length() > 0)
             {
-                word = GetWordWithoutQuotes(word, '"');
-                word = GetWordWithoutQuotes(word, '\'');
+                if (std::all_of(word.begin() + 1, word.end(), ::islower))
+                    transform(word.begin(), word.end(), word.begin(), ::tolower);
+
+                word = GetWordWithoutSurroundingPunctuation(word, ",:;![]{}()'\"");
 
                 // we lower case the first letter, unless there are capitals inside the word
                 // in which case we assume that it's some kind of abbreviation
@@ -101,10 +103,11 @@ void DirectoryLexicalAnalyzer::ThrowError(const char* errorApiCall, T diagnostic
     throw std::exception(errorBuilder.str().c_str());
 }
 
-std::string DirectoryLexicalAnalyzer::GetWordWithoutQuotes(std::string& word, char quoteSymbol)
+std::string DirectoryLexicalAnalyzer::GetWordWithoutSurroundingPunctuation(const std::string& word, const std::string& punctuationSymbols)
 {
-    bool isQuoted = word.length() > 1 
-        && word[0] == quoteSymbol 
-        && word[word.length() - 1] == quoteSymbol;
-    return isQuoted ? word.substr(1, word.length() - 2) : word;
+    auto startOfWord = word.find_first_not_of(punctuationSymbols);
+    auto endOfWord = word.find_last_not_of(punctuationSymbols) + 1;
+    startOfWord = startOfWord == std::string::npos ? 0 : startOfWord;
+    endOfWord = endOfWord == std::string::npos ? word.length() : endOfWord;
+    return word.substr(startOfWord, endOfWord - startOfWord);
 }
