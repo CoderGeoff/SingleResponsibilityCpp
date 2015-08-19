@@ -82,6 +82,7 @@ TEST(WordCounterTests, GivenAWordInSingleQuotes_WhenFrequencyIsQueried_ShouldBeC
     DirectoryLexicalAnalyzer counter(directory.Name());
     ASSERT_EQ(2, counter.Frequency("one"));
 }
+
 TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThemAsIndependentWords)
 {
     // Given
