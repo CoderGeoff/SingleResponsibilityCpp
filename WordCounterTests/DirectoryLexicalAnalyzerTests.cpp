@@ -51,12 +51,20 @@ TEST(WordCounterTests, GivenOneFileWith3RepeatedWords_WhenFrequencyIsQueried_Sho
     ASSERT_EQ(3, counter.Frequency("three"));
 }
 
-TEST(WordCounterTests, GivenOneFileWithWordsRepeatedInDifferentCase_WhenFrequencyIsQueried_CountShouldBeReportedAgainstLowerCaseWord)
+TEST(WordCounterTests, GivenOneWordWithDifferentFirstLetterCapitalization_WhenFrequencyIsQueried_CountShouldBeReportedAgainstLowerCaseWord)
 {
     TemporaryDirectory directory;
-    TemporaryFile file(directory.Name(), "one ONE OnE oNe");
+    TemporaryFile file(directory.Name(), "one One");
     DirectoryLexicalAnalyzer counter(directory.Name());
-    ASSERT_EQ(4, counter.Frequency("one"));
+    ASSERT_EQ(2, counter.Frequency("one"));
+}
+
+TEST(WordCounterTests, GivenOneWordWithDifferentCapitalization_WhenFrequencyIsQueried_ShouldBeCountedAsDifferentWords)
+{
+    TemporaryDirectory directory;
+    TemporaryFile file(directory.Name(), "who WHO");
+    DirectoryLexicalAnalyzer counter(directory.Name());
+    ASSERT_EQ(1, counter.Frequency("who"));
 }
 
 TEST(WordCounterTests, GivenWordsWithApostrophes_WhenQueried_CountShouldCountThemAsIndependentWords)

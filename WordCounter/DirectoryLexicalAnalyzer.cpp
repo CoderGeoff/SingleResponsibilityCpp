@@ -50,10 +50,16 @@ void DirectoryLexicalAnalyzer::Initialize()
         {
             std::string word;
             file >> word;
-            transform(word.begin(), word.end(), word.begin(), ::tolower);
+
 
             if (word.length() > 0)
             {
+
+                // we lower case the first letter, unless there are capitals inside the word
+                // in which case we assume that it's some kind of abbreviation
+                if (std::all_of(word.begin() + 1, word.end(), ::islower))
+                    transform(word.begin(), word.end(), word.begin(), ::tolower);
+
                 m_WordCount++;
                 m_Frequency[word]++;
                 m_LongestWordLength = max(word.length(), m_LongestWordLength);
