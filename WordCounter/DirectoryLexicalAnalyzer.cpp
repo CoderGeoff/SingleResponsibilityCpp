@@ -68,6 +68,7 @@ void DirectoryLexicalAnalyzer::Initialize()
                 }
             }
         }
+        file.close();
     }
     m_IsInitialized = true;
 }
