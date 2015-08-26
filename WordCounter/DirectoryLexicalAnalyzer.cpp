@@ -59,8 +59,8 @@ void DirectoryLexicalAnalyzer::Initialize()
                 {
                     // we lower case the first letter, unless there are capitals inside the word
                     // in which case we assume that it's some kind of abbreviation
-                    if (std::all_of(word.begin() + 1, word.end(), ::islower))
-                        transform(word.begin(), word.end(), word.begin(), ::tolower);
+                    if (std::none_of(word.begin() + 1, word.end(), ::isupper))
+                        word[0] = ::tolower(word[0]);
 
                     m_WordCount++;
                     m_Frequency[word]++;
