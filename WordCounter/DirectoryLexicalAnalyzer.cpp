@@ -53,9 +53,6 @@ void DirectoryLexicalAnalyzer::Initialize()
 
             if (word.length() > 0)
             {
-                if (std::all_of(word.begin() + 1, word.end(), ::islower))
-                    transform(word.begin(), word.end(), word.begin(), ::tolower);
-
                 word = GetWordWithoutSurroundingPunctuation(word, ",:;![]{}()'\"");
 
                 if (word.length() > 0)
