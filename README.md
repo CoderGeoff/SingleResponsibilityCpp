@@ -1,7 +1,17 @@
 # SingleResponsibilityCpp
-An exercise to underline the SRP
+An exercise to underline the Single Responsibility Principle, using C++ and Visual Studio.
+Based on Visual Studio 2013.
 
-Here you will see the following classes
+## Getting started
+
+1. Clone the repository 
+2. Open Visual Studio
+3. Open the solution file, SingleResponsibility.sln, in the root directory of the repository
+4. Build the project in Debug
+5. Run the tests, Debug/WordCounterTests.exe 
+6. Have a look at the code:
+
+You will find:
 
 In WordCounter:
 
